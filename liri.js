@@ -20,48 +20,76 @@ for (var i = 3; i < userInput.length; i++) {
 }
 
 // console.log(process.argv);
+
+function runOmdb() {
+
+    var queryUrl = "http://www.omdbapi.com/?t=" + searchQuery + "&y=&plot=short&apikey=trilogy";
+
+    axios.get(queryUrl).then(
+        function (response) {
+
+            // console.log(queryUrl);
+            // console.log("START response.data ----------------");
+            // console.log(response.data);
+            // console.log("END response.data ----------------");
+
+            console.log("Movie Name: " + response.data.Title);
+            console.log("Release Year: " + response.data.Year);
+            console.log("IMDB Rating: " + response.data.Ratings[0].Value);
+            console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
+            console.log("Production Country: " + response.data.Country);
+            console.log("Language: " + response.data.Language);
+            console.log("Plot: " + response.data.Plot);
+            console.log("Actors: " + response.data.Actors);
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log("---------------Data---------------");
+                console.log(error.response.data);
+                console.log("---------------Status---------------");
+                console.log(error.response.status);
+                console.log("---------------Status---------------");
+                console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an object that comes back with details pertaining to the error that occurred.
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error", error.message);
+            }
+            console.log(error.config);
+        });
+}
+
 //SEE Activity OMDBAXIOS activity as guideline for this portion (DO MOVIE THIS FIRSST)
 
 // USE SWITCH STATEMENTS FOR EACH BELOW
 
 switch (userCommand) {
-    //check if userCommand is "concert-this"
+    
+    //check if userCommand is "movie-this"
     case "movie-this":
-        console.log("command = " + userCommand);
-        console.log("search = " + searchQuery);
 
-        var queryUrl = "http://www.omdbapi.com/?t=" + searchQuery + "&y=&plot=short&apikey=trilogy";
+        if (searchQuery == "") {
+            var searchQuery = "mr+nobody";
+            // console.log("command = " + userCommand);
+            // console.log("search = " + searchQuery);
 
-        axios.get(queryUrl).then(
-            function (response) {
-                console.log(queryUrl);
-                console.log("response below ----------------");
-                console.log(response.data);
-                console.log("response above ----------------");
-                console.log("Release Year: " + response.data.Year);
-            })
-            .catch(function (error) {
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    console.log("---------------Data---------------");
-                    console.log(error.response.data);
-                    console.log("---------------Status---------------");
-                    console.log(error.response.status);
-                    console.log("---------------Status---------------");
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an object that comes back with details pertaining to the error that occurred.
-                    console.log(error.request);
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
+            runOmdb();
 
-        break;
+            break;
+
+        } else {
+            // console.log("command = " + userCommand);
+            // console.log("search = " + searchQuery);
+            runOmdb();
+
+            break;
+        }
 
     case "concert-this":
         console.log("command = " + userCommand);
@@ -76,6 +104,13 @@ switch (userCommand) {
     case "do-what-it-says":
         console.log("command = do what it says in the text file!");
         break;
+
+    default:
+        console.log("Error! Try one of these:");
+        console.log("- 'movie-this moviename'");
+        console.log("- 'concert-this artistname'");
+        console.log("- 'spotify-this-song songname'");
+        console.log("- 'do-what-it-says'");
 
 }
 
