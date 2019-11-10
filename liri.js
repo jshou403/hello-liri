@@ -262,7 +262,7 @@ switch (userCommand) {
             if (error) {
 
                 return console.log(error);
-                
+
             } else {
 
                 // console.log("data = " + data);
@@ -273,7 +273,7 @@ switch (userCommand) {
                 var dataArr = data.split(",");
 
                 console.log("dataArr = " + dataArr);
-                console.log("dataArr[0] = " + dataArr[0]); 
+                console.log("dataArr[0] = " + dataArr[0]);
                 console.log("dataArr[1] = " + dataArr[1]);
 
                 var userCommand = dataArr[0];
@@ -281,6 +281,84 @@ switch (userCommand) {
 
                 var searchQuery = dataArr[1].split(" ").join("+");
                 console.log("searchQuery = " + searchQuery);
+
+                switch (userCommand) {
+
+                    // if userCommand = movie-this
+                    case "movie-this":
+
+                        if (searchQuery == "") {
+                            var searchQuery = "mr+nobody";
+                            // console.log("command = " + userCommand);
+                            // console.log("search = " + searchQuery);
+
+                            console.log("");
+                            console.log("Liri says: You didn't provide a movie.");
+                            console.log("Liri says: Here's some info about my favorite!");
+
+                            runOmdb();
+
+                            break;
+
+                        } else {
+                            // console.log("command = " + userCommand);
+                            // console.log("search = " + searchQuery);
+                            runOmdb();
+
+                            break;
+                        }
+
+                    // if userCommand = movie-this
+                    case "concert-this":
+
+                        if (searchQuery == "") {
+                            console.log("");
+                            console.log("Liri says: Please try the 'concert-this' command with a band or artist!");
+                            // console.log("command = " + userCommand);
+                            // console.log("search = " + searchQuery);
+
+                            break;
+
+                        } else {
+                            // console.log("command = " + userCommand);
+                            // console.log("search = " + searchQuery);
+
+                            runBandsInTown();
+
+                            break;
+                        }
+
+                    // if userCommand = spotify-this-song
+                    case (userCommand == "spotify-this-song"):
+
+                        if (searchQuery == "") {
+                            // console.log("command = " + userCommand);
+                            // console.log("search = " + searchQuery);
+                            // console.log("Liri says: Please try the 'spotify-this-song' command with a song title!");
+
+                            console.log("");
+                            console.log("Liri says: You didn't provide a song.");
+                            console.log("Liri says: Check out my favorites!");
+
+                            var searchQuery = "ritual+union";
+
+                            runSpotify();
+
+                            break;
+
+                        } else {
+                            // console.log("command = " + userCommand);
+                            // console.log("search = " + searchQuery);
+
+                            console.log("");
+                            console.log("Here are the top 3 matches: ");
+
+                            runSpotify();
+
+                            break;
+                        };
+
+                }
 
             }
 
