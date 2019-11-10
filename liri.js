@@ -272,9 +272,9 @@ switch (userCommand) {
                 // Then split it by commas
                 var dataArr = data.split(",");
 
-                // console.log("dataArr = " + dataArr);
-                // console.log("dataArr[0] = " + dataArr[0]); 
-                // console.log("dataArr[1] = " + dataArr[1]);
+                console.log("dataArr = " + dataArr);
+                console.log("dataArr[0] = " + dataArr[0]); 
+                console.log("dataArr[1] = " + dataArr[1]);
 
                 var userCommand = dataArr[0];
                 console.log("userCommand = " + userCommand);
