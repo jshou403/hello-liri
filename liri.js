@@ -38,6 +38,7 @@ function runOmdb() {
             // console.log(response.data);
             // console.log("END response.data ----------------");
 
+            console.log("");
             console.log("Movie Name: " + response.data.Title);
             console.log("Release Year: " + response.data.Year);
             console.log("IMDB Rating: " + response.data.Ratings[0].Value);
@@ -82,7 +83,9 @@ function runBandsInTown() {
             // console.log(response.data);
             // console.log("END response.data ----------------");
 
+            console.log("");
             console.log("Here are the next 5 " + response.data[0].artist.name + " Concerts: ");
+            console.log("");
 
             for (var i = 0; i < 5; i++) {
 
@@ -93,10 +96,11 @@ function runBandsInTown() {
 
                 var concertDate = moment(response.data[i].datetime).format("MM/DD/YYYY");
 
-                console.log(num + " ------------------------------------");
+                console.log(num);
                 console.log("Concert Date: " + concertDate);
                 console.log("Venue: " + response.data[i].venue.name);
                 console.log("Location: " + response.data[i].venue.city + ", " + response.data[i].venue.country);
+                console.log("");
 
             }
 
@@ -123,6 +127,44 @@ function runBandsInTown() {
         });
 }
 
+function runSpotify() {
+
+    spotify.search({ type: 'track', query: searchQuery }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+
+        for (var i = 0; i < 3; i++) {
+
+            // if there is a result after i, keep running
+            // if there is no result after i, display "no more concerts!"
+
+            var num = i + parseInt("1");
+
+            // var concertDate = moment(response.data[i].datetime).format("MM/DD/YYYY");
+
+            console.log("");
+            console.log(num); 
+            console.log("Song Title: " + data.tracks.items[i].name);
+            console.log("Artist Name: " + data.tracks.items[i].artists[0].name);
+            console.log("Album Name: " + data.tracks.items[i].album.name);
+            console.log("Preview Link: " + data.tracks.items[i].preview_url);
+
+        }
+
+        // console.log("START DATA -------------------------------");
+        // console.log(data.tracks.items[0]);
+        // console.log("END DATA ---------------------------------");
+
+        // console.log("Preview Link: " + data.tracks.items[0].preview_url); 
+        // console.log("Artist: " + data.tracks.items[0].artists[0].name);
+        // console.log("Song Name: " + data.tracks.items[0].name);
+        // console.log("Album: " + data.tracks.items[0].album.name);
+
+    });
+
+}
+
 switch (userCommand) {
 
     // if userCommand = hello
@@ -142,9 +184,9 @@ switch (userCommand) {
             // console.log("command = " + userCommand);
             // console.log("search = " + searchQuery);
 
+            console.log("");
             console.log("Liri says: You didn't provide a movie.");
             console.log("Liri says: Here's some info about my favorite!");
-            console.log("");
 
             runOmdb();
 
@@ -162,6 +204,7 @@ switch (userCommand) {
     case "concert-this":
 
         if (searchQuery == "") {
+            console.log("");
             console.log("Liri says: Please try the 'concert-this' command with a band or artist!");
             // console.log("command = " + userCommand);
             // console.log("search = " + searchQuery);
@@ -181,14 +224,28 @@ switch (userCommand) {
     case "spotify-this-song":
 
         if (searchQuery == "") {
-            console.log("command = " + userCommand);
-            console.log("search = " + searchQuery);
-            console.log("Liri says: Please try the 'spotify-this-song' command with a song title!");            
+            // console.log("command = " + userCommand);
+            // console.log("search = " + searchQuery);
+            // console.log("Liri says: Please try the 'spotify-this-song' command with a song title!");
+
+            console.log("");
+            console.log("Liri says: You didn't provide a song.");
+            console.log("Liri says: Check out my favorites!");
+
+            var searchQuery = "ritual+union";
+
+            runSpotify();
+
             break;
 
         } else {
-            console.log("command = " + userCommand);
-            console.log("search = " + searchQuery);
+            // console.log("command = " + userCommand);
+            // console.log("search = " + searchQuery);
+
+            console.log("");
+            console.log("Here are the top 3 matches: ");
+            
+            runSpotify();
 
             break;
         };
