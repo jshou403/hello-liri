@@ -3,12 +3,17 @@ var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
+var moment = require('moment');
+// moment().format();
 
 //capture command that user puts in
 var userCommand = process.argv[2];
-var userInput = process.argv;
-var searchQuery = ""; // everything after index of 3 and later
+var userInput = process.argv; // captures all of the userInput 
+var searchQuery = ""; // stores the user input after the user command
 
+// loops through the userInput and stores the info after the command 
+// if more than one word, will store into the searchQuery
+// else will store the word as the searchQuery
 for (var i = 3; i < userInput.length; i++) {
 
     if (i > 3 && i < userInput.length) {
@@ -59,25 +64,87 @@ function runOmdb() {
                 console.log(error.request);
             } else {
                 // Something happened in setting up the request that triggered an Error
-                console.log("Error", error.message);
+                console.log("Error = ", error.message);
             }
             console.log(error.config);
         });
 }
 
-//SEE Activity OMDBAXIOS activity as guideline for this portion (DO MOVIE THIS FIRSST)
+function runBandsInTown() {
 
-// USE SWITCH STATEMENTS FOR EACH BELOW
+    var queryUrl = "https://rest.bandsintown.com/artists/" + searchQuery + "/events?app_id=codingbootcamp";
+
+    axios.get(queryUrl).then(
+        function (response) {
+
+            // console.log(queryUrl);
+            // console.log("START response.data ----------------");
+            // console.log(response.data);
+            // console.log("END response.data ----------------");
+
+            console.log("Here are the next 5 " + response.data[0].artist.name + " Concerts: ");
+
+            for (var i = 0; i < 5; i++) {
+
+                // if there is a result after i, keep running
+                // if there is no result after i, display "no more concerts!"
+
+                var num = i + parseInt("1");
+
+                var concertDate = moment(response.data[i].datetime).format("MM/DD/YYYY");
+
+                console.log(num + " ------------------------------------");
+                console.log("Concert Date: " + concertDate);
+                console.log("Venue: " + response.data[i].venue.name);
+                console.log("Location: " + response.data[i].venue.city + ", " + response.data[i].venue.country);
+
+            }
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log("---------------Data---------------");
+                console.log(error.response.data);
+                console.log("---------------Status---------------");
+                console.log(error.response.status);
+                console.log("---------------Status---------------");
+                console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an object that comes back with details pertaining to the error that occurred.
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error = ", error.message);
+            }
+            console.log(error.config);
+        });
+}
 
 switch (userCommand) {
-    
-    //check if userCommand is "movie-this"
+
+    // if userCommand = hello
+    case "hello":
+        console.log("Hi! Welcome to Liri! Try one of these commands: ");
+        console.log("     movie-this <movie name here>");
+        console.log("     concert-this <artist/band name here>");
+        console.log("     spotify-this-song <song name here>");
+        console.log("     do-what-it-says");
+        break;
+
+    // if userCommand = movie-this
     case "movie-this":
 
         if (searchQuery == "") {
             var searchQuery = "mr+nobody";
             // console.log("command = " + userCommand);
             // console.log("search = " + searchQuery);
+
+            console.log("Liri says: You didn't provide a movie.");
+            console.log("Liri says: Here's some info about my favorite!");
+            console.log("");
 
             runOmdb();
 
@@ -91,26 +158,51 @@ switch (userCommand) {
             break;
         }
 
+    // if userCommand = movie-this
     case "concert-this":
-        console.log("command = " + userCommand);
-        console.log("search = " + searchQuery);
-        break;
 
+        if (searchQuery == "") {
+            console.log("Liri says: Please try the 'concert-this' command with a band or artist!");
+            // console.log("command = " + userCommand);
+            // console.log("search = " + searchQuery);
+
+            break;
+
+        } else {
+            // console.log("command = " + userCommand);
+            // console.log("search = " + searchQuery);
+
+            runBandsInTown();
+
+            break;
+        }
+
+    // if userCommand = spotify-this-song
     case "spotify-this-song":
-        console.log("command = " + userCommand);
-        console.log("search = " + searchQuery);
-        break;
+
+        if (searchQuery == "") {
+            console.log("command = " + userCommand);
+            console.log("search = " + searchQuery);
+            console.log("Liri says: Please try the 'spotify-this-song' command with a song title!");            
+            break;
+
+        } else {
+            console.log("command = " + userCommand);
+            console.log("search = " + searchQuery);
+
+            break;
+        };
 
     case "do-what-it-says":
         console.log("command = do what it says in the text file!");
         break;
 
     default:
-        console.log("Error! Try one of these:");
-        console.log("- 'movie-this moviename'");
-        console.log("- 'concert-this artistname'");
-        console.log("- 'spotify-this-song songname'");
-        console.log("- 'do-what-it-says'");
+        console.log("Sorry, Liri doesn't understand that command yet! Try one of these:");
+        console.log("     movie-this <movie name here>");
+        console.log("     concert-this <artist/band name here>");
+        console.log("     spotify-this-song <song name here>");
+        console.log("     do-what-it-says");
 
 }
 
