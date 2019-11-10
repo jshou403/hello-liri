@@ -4,6 +4,7 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
 var moment = require('moment');
+var fs = require("fs");
 // moment().format();
 
 //capture command that user puts in
@@ -144,7 +145,7 @@ function runSpotify() {
             // var concertDate = moment(response.data[i].datetime).format("MM/DD/YYYY");
 
             console.log("");
-            console.log(num); 
+            console.log(num);
             console.log("Song Title: " + data.tracks.items[i].name);
             console.log("Artist Name: " + data.tracks.items[i].artists[0].name);
             console.log("Album Name: " + data.tracks.items[i].album.name);
@@ -244,14 +245,47 @@ switch (userCommand) {
 
             console.log("");
             console.log("Here are the top 3 matches: ");
-            
+
             runSpotify();
 
             break;
         };
 
     case "do-what-it-says":
-        console.log("command = do what it says in the text file!");
+        console.log("");
+        console.log("'Do-What-It-Says' Command Initiated!");
+        console.log("");
+
+        fs.readFile("random.txt", "utf8", function (error, data) {
+
+            // If the code experiences any errors it will log the error to the console.
+            if (error) {
+
+                return console.log(error);
+                
+            } else {
+
+                // console.log("data = " + data);
+                // console.log("data[0] = " + data[0]); 
+                // console.log("data[1] = " + data[1]);
+
+                // Then split it by commas
+                var dataArr = data.split(",");
+
+                // console.log("dataArr = " + dataArr);
+                // console.log("dataArr[0] = " + dataArr[0]); 
+                // console.log("dataArr[1] = " + dataArr[1]);
+
+                var userCommand = dataArr[0];
+                console.log("userCommand = " + userCommand);
+
+                var searchQuery = dataArr[1].split(" ").join("+");
+                console.log("searchQuery = " + searchQuery);
+
+            }
+
+        });
+
         break;
 
     default:
@@ -262,28 +296,3 @@ switch (userCommand) {
         console.log("     do-what-it-says");
 
 }
-
-//check if userCommand is "concert-this" OK
-
-    // run API call using axios to bands-in-town API
-
-    // inject users search term into queryURL 
-    // hint: hw instructions provides more guidance to each API call 
-
-    // display 1) venue 2) venue location 3) date of event
-
-    // use moment to format date of event to MM/DD/YYYY
-
-//check if userCommand is "spotify-this-song"
-
-    // Using Spotify Node package info, make call to Spotify API
-
-    // Display to user 1) artist name 2) song name 3) previrw link of song from spotify 4) album that song is from 
-
-    // If user does not provide argument, display default song
-
-//check if userCommand is "movie-this" 
-
-//check if userCommand is"do-what-it-says" 
-
-//otherwise, display mesage to user to try again 
