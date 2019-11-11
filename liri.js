@@ -27,7 +27,7 @@ for (var i = 3; i < userInput.length; i++) {
 
 // console.log(process.argv);
 
-function runOmdb() {
+function runOmdb(searchQuery) {
 
     var queryUrl = "http://www.omdbapi.com/?t=" + searchQuery + "&y=&plot=short&apikey=trilogy";
 
@@ -72,9 +72,11 @@ function runOmdb() {
         });
 }
 
-function runBandsInTown() {
+function runBandsInTown(searchQuery) {
 
     var queryUrl = "https://rest.bandsintown.com/artists/" + searchQuery + "/events?app_id=codingbootcamp";
+
+    // console.log("query URL " + queryUrl);
 
     axios.get(queryUrl).then(
         function (response) {
@@ -128,7 +130,7 @@ function runBandsInTown() {
         });
 }
 
-function runSpotify() {
+function runSpotify(searchQuery) {
 
     spotify.search({ type: 'track', query: searchQuery }, function (err, data) {
         if (err) {
@@ -189,14 +191,14 @@ switch (userCommand) {
             console.log("Liri says: You didn't provide a movie.");
             console.log("Liri says: Here's some info about my favorite!");
 
-            runOmdb();
+            runOmdb(searchQuery);
 
             break;
 
         } else {
             // console.log("command = " + userCommand);
             // console.log("search = " + searchQuery);
-            runOmdb();
+            runOmdb(searchQuery);
 
             break;
         }
@@ -216,7 +218,7 @@ switch (userCommand) {
             // console.log("command = " + userCommand);
             // console.log("search = " + searchQuery);
 
-            runBandsInTown();
+            runBandsInTown(searchQuery);
 
             break;
         }
@@ -235,7 +237,7 @@ switch (userCommand) {
 
             var searchQuery = "ritual+union";
 
-            runSpotify();
+            runSpotify(searchQuery);
 
             break;
 
@@ -246,7 +248,7 @@ switch (userCommand) {
             console.log("");
             console.log("Here are the top 3 matches: ");
 
-            runSpotify();
+            runSpotify(searchQuery);
 
             break;
         };
@@ -265,101 +267,31 @@ switch (userCommand) {
 
             } else {
 
-                // console.log("data = " + data);
-                // console.log("data[0] = " + data[0]); 
-                // console.log("data[1] = " + data[1]);
+                // console.log(data);
 
                 // Then split it by commas
                 var dataArr = data.split(",");
 
-                console.log("dataArr = " + dataArr);
-                console.log("dataArr[0] = " + dataArr[0]);
-                console.log("dataArr[1] = " + dataArr[1]);
+                // console.log("dataArr = " + dataArr);
+                // console.log("dataArr[0] = " + dataArr[0]);
+                // console.log("dataArr[1] = " + dataArr[1]);
 
                 var userCommand = dataArr[0];
-                console.log("userCommand = " + userCommand);
+                // console.log("userCommand = " + userCommand);
 
                 var searchQuery = dataArr[1].split(" ").join("+");
-                console.log("searchQuery = " + searchQuery);
+                // console.log("searchQuery = " + searchQuery);
 
-                switch (userCommand) {
-
-                    // if userCommand = movie-this
-                    case "movie-this":
-
-                        if (searchQuery == "") {
-                            var searchQuery = "mr+nobody";
-                            // console.log("command = " + userCommand);
-                            // console.log("search = " + searchQuery);
-
-                            console.log("");
-                            console.log("Liri says: You didn't provide a movie.");
-                            console.log("Liri says: Here's some info about my favorite!");
-
-                            runOmdb();
-
-                            break;
-
-                        } else {
-                            // console.log("command = " + userCommand);
-                            // console.log("search = " + searchQuery);
-                            runOmdb();
-
-                            break;
-                        }
-
-                    // if userCommand = movie-this
-                    case "concert-this":
-
-                        if (searchQuery == "") {
-                            console.log("");
-                            console.log("Liri says: Please try the 'concert-this' command with a band or artist!");
-                            // console.log("command = " + userCommand);
-                            // console.log("search = " + searchQuery);
-
-                            break;
-
-                        } else {
-                            // console.log("command = " + userCommand);
-                            // console.log("search = " + searchQuery);
-
-                            runBandsInTown();
-
-                            break;
-                        }
-
-                    // if userCommand = spotify-this-song
-                    case (userCommand == "spotify-this-song"):
-
-                        if (searchQuery == "") {
-                            // console.log("command = " + userCommand);
-                            // console.log("search = " + searchQuery);
-                            // console.log("Liri says: Please try the 'spotify-this-song' command with a song title!");
-
-                            console.log("");
-                            console.log("Liri says: You didn't provide a song.");
-                            console.log("Liri says: Check out my favorites!");
-
-                            var searchQuery = "ritual+union";
-
-                            runSpotify();
-
-                            break;
-
-                        } else {
-                            // console.log("command = " + userCommand);
-                            // console.log("search = " + searchQuery);
-
-                            console.log("");
-                            console.log("Here are the top 3 matches: ");
-
-                            runSpotify();
-
-                            break;
-                        };
-
+                if (userCommand == "spotify-this-song") {
+                    runSpotify(searchQuery);
+                } else if (userCommand == "movie-this") {
+                    runOmdb(searchQuery);
+                } else if (userCommand == "concert-this") {
+                    searchQuery = searchQuery.slice(1, -1);
+                    // console.log("do-what-it-says: " + userCommand);
+                    // console.log("searchQuery : " + searchQuery);
+                    runBandsInTown(searchQuery);
                 }
-
             }
 
         });
