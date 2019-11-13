@@ -170,6 +170,7 @@ function runSpotify(searchQuery) {
                     console.log("Song Title: " + data.tracks.items[i].name);
                     console.log("Album Name: " + data.tracks.items[i].album.name);
                     console.log("Preview Link: " + data.tracks.items[i].preview_url);
+                    console.log("");
 
                 }
             } else {
