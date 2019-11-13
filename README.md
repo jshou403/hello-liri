@@ -2,14 +2,14 @@
 
 #### Liri is a CLI application that uses node packages to access movie and music data to output information relevant to the user's search query. 
 
-## About Liri.js
-
-In this app, the user has the option to run a few commands that also require a search query of their choice. Once the command and search query is entered, a request is sent to an API which requires certain node packages. Once a response is received from the API, the app takes pre-determined pieces of information to the command line pertaining to the search query. 
-
 * `movie-this <movie name here>` returns information about the movie 
 * `concert-this <artist/band name here>` returns upcoming concerts for the artist/band
 * `spotify-this-song <song name here>` returns list of songs matching that title
 * `do-what-it-says` takes in the command and search query from the random.txt file
+
+## How It Works
+
+The user has the option to run a few commands that also require a search query of their choice. Once the command and search query is entered, a request is sent to an API which requires certain node packages. Once a response is received from the API, the app takes pre-determined pieces of information to the command line pertaining to the search query. 
 
 ## Code Organizaion
 
@@ -17,18 +17,22 @@ Liri.js - Here, the node packages required to execute the functions are listed. 
 
 Keys.js - This file holds the hidden API key and secret needed for the Spotify Node API. 
 
-## Run Liri.js
+## Link to Github Repo
+
+[https://github.com/jshou403/liri-node-app](https://github.com/jshou403/liri-node-app)
+
+## Take Liri For a Run
 
 * In order to access the Spotify Node API, you will need to have a Spotify key and secret. Log in or create a free Spotify account and create an app here to generate the key and secret: 
     
     [Create An App](https://developer.spotify.com/my-applications/#!/applications/create)
 
-    Once you've obtained your ID and secret, download the repository and open the keys.js file. Then update with your ID and secret and save this file. 
+* Once you've obtained your ID and secret, download the repository and open the keys.js file. Then update with your ID and secret and save this file. 
 
     ```
     exports.spotify = {
-    id: *your-ID-here*,
-    secret: *your-secret-here*
+    id: your-ID-here,
+    secret: your-secret-here
     };
     ```
 
@@ -56,21 +60,17 @@ Keys.js - This file holds the hidden API key and secret needed for the Spotify N
 
     `node liri hello` 
 
-
-## How to Use Liri.js
-
 * Say hello to liri! 
-!["hello"](https://github.com/jshou403/liri-node-app/images/hello.png)
+!["hello"](https://jshou403.github.io/liri-node-app/images/hello.png)
 
 * Search for a movie. 
-!["movie-this"](https://github.com/jshou403/liri-node-app/images/movie.png) 
+!["movie-this"](https://jshou403.github.io/liri-node-app/images/movie.png) 
 
 * Find concerts for an artist or band. 
-!["concert-this" userCommand](https://github.com/jshou403/liri-node-app/images/concert.png) 
+!["concert-this" userCommand](https://jshou403.github.io/liri-node-app/images/concert.png) 
 
 * Find songs matching a title. 
-!["spotify-this-song" userCommand](https://github.com/jshou403/liri-node-app/images/spotify.png) 
-
+!["spotify-this-song" userCommand](https://jshou403.github.io/liri-node-app/images/spotify.png) 
 
 ## Technologies Used
 * Javascript
@@ -78,9 +78,6 @@ Keys.js - This file holds the hidden API key and secret needed for the Spotify N
   * Axios to retrieve info from OMDB and BandsInTown API
   * Spotify Node API
   * Moment
-
-## Deployed App
-[http://jshou403.gitub.io/](http://jshou403.gitub.io/)
 
 ## My Role
 Jacalyn Shou - Full Stack Developer
