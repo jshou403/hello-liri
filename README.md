@@ -61,16 +61,16 @@ Keys.js - This file holds the hidden API key and secret needed for the Spotify N
     `node liri hello` 
 
 * Say hello to liri! 
-!["hello"](https://jshou403.github.io/liri-node-app/images/hello.png)
+!["hello"](https://raw.githubusercontent.com/jshou403/liri-node-app/master/images/hello.png)
 
 * Search for a movie. 
-!["movie-this"](https://jshou403.github.io/liri-node-app/images/movie.png) 
+!["movie-this"](https://raw.githubusercontent.com/jshou403/liri-node-app/master/imagesmovie.png) 
 
 * Find concerts for an artist or band. 
-!["concert-this" userCommand](https://jshou403.github.io/liri-node-app/images/concert.png) 
+!["concert-this" userCommand](https://raw.githubusercontent.com/jshou403/liri-node-app/master/images/concert.png) 
 
 * Find songs matching a title. 
-!["spotify-this-song" userCommand](https://jshou403.github.io/liri-node-app/images/spotify.png) 
+!["spotify-this-song" userCommand](https://raw.githubusercontent.com/jshou403/liri-node-app/master/imagesspotify.png) 
 
 ## Technologies Used
 * Javascript
