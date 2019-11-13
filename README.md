@@ -64,13 +64,13 @@ Keys.js - This file holds the hidden API key and secret needed for the Spotify N
 !["hello"](https://raw.githubusercontent.com/jshou403/liri-node-app/master/images/hello.png)
 
 * Search for a movie. 
-!["movie-this"](https://raw.githubusercontent.com/jshou403/liri-node-app/master/imagesmovie.png) 
+!["movie-this"](https://raw.githubusercontent.com/jshou403/liri-node-app/master/images/movie.png) 
 
 * Find concerts for an artist or band. 
 !["concert-this" userCommand](https://raw.githubusercontent.com/jshou403/liri-node-app/master/images/concert.png) 
 
 * Find songs matching a title. 
-!["spotify-this-song" userCommand](https://raw.githubusercontent.com/jshou403/liri-node-app/master/imagesspotify.png) 
+!["spotify-this-song" userCommand](https://raw.githubusercontent.com/jshou403/liri-node-app/master/images/spotify.png) 
 
 ## Technologies Used
 * Javascript
