@@ -79,5 +79,7 @@ Keys.js - This file holds the hidden API key and secret needed for the Spotify N
   * Spotify Node API
   * Moment
 
-## My Role
-Jacalyn Shou - Full Stack Developer
+## Developer
+Jacalyn Shou 
+* [Github](https://jshou403.github.io/)
+* [LinkedIn](https://www.linkedin.com/in/jacalyn-shou/)
