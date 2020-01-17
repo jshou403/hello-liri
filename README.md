@@ -1,25 +1,17 @@
-# liri-node-app
+# hello-liri
 
-#### Liri is a CLI application that uses node packages to access movie and music data to output information relevant to the user's search query. 
+#### Liri is a CLI application that uses node packages to access movie and music data to output information relevant to the user's search query.
+
+* [Repository](https://github.com/jshou403/hello-liri)
+
+## How The App Works
+
+The user has the option to run a few commands that also require a search query of their choice. Once the command and search query is entered, a request is sent to the appropriate API. Once a response is received from the API, the app returns the response to the command line. 
 
 * `movie-this <movie name here>` returns information about the movie 
 * `concert-this <artist/band name here>` returns upcoming concerts for the artist/band
 * `spotify-this-song <song name here>` returns list of songs matching that title
 * `do-what-it-says` takes in the command and search query from the random.txt file
-
-## How It Works
-
-The user has the option to run a few commands that also require a search query of their choice. Once the command and search query is entered, a request is sent to an API which requires certain node packages. Once a response is received from the API, the app takes pre-determined pieces of information to the command line pertaining to the search query. 
-
-## Code Organizaion
-
-Liri.js - Here, the node packages required to execute the functions are listed. Then, the functions that the app can run are detailed with instructions to request data from an API and what to do with the data response received. Finally, the scenarios that determine which function is called are listed. 
-
-Keys.js - This file holds the hidden API key and secret needed for the Spotify Node API. 
-
-## Link to Github Repo
-
-[https://github.com/jshou403/liri-node-app](https://github.com/jshou403/liri-node-app)
 
 ## Take Liri For a Run
 
@@ -75,11 +67,12 @@ Keys.js - This file holds the hidden API key and secret needed for the Spotify N
 ## Technologies Used
 * Javascript
 * Node.js
-  * Axios to retrieve info from OMDB and BandsInTown API
-  * Spotify Node API
+  * Axios 
+  * OMDB, BandsInTown, Spotify APIs
   * Moment
 
 ## Developer
 Jacalyn Shou 
-* [Github](https://jshou403.github.io/)
+* [Portfolio](http://www.jacalynshou.com/)
+* [Github](https://github.com/jshou403)
 * [LinkedIn](https://www.linkedin.com/in/jacalyn-shou/)
