@@ -1,6 +1,6 @@
 # hello-liri
 
-#### Liri is a CLI application that uses node packages to access movie and music data to output information relevant to the user's search query.
+#### Liri is an application with a CLI that uses node packages to access movie and music data to output information relevant to the user's search query.
 
 * [Repository](https://github.com/jshou403/hello-liri)
 
